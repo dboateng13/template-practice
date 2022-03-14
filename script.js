@@ -6,13 +6,13 @@ const twitterBtn = document.getElementById('twitter');
 const loader = document.getElementById('loader');
 
 // Show loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
 // Hide Loading
-function complete() {
+function removeLoadingSpinner() {
     if (!loader.hidden){
         quoteContainer.hidden = false;
         loader.hidden = true;
@@ -22,7 +22,7 @@ function complete() {
 
 // Get quote from api
 async function getQuote() {
-    loading();
+    showLoadingSpinner();
     const proxyURL = 'https://cors-anywhere.herokuapp.com/' 
     const apiURL = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
       
@@ -43,7 +43,7 @@ async function getQuote() {
          }
           quoteText.innerText = data.quoteText;
           //stop Loader, Show quote
-          complete();
+          removeLoadingSpinner();
 
       } catch (error){
           getQuote();
